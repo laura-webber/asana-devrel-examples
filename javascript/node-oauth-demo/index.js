@@ -24,7 +24,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.static("static"));
 
 // Send static index.html page to the client.
-// This page includes a button to authenticatate with Asana.
+// This page includes a button to authenticate with Asana.
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/static/index.html"));
 });
@@ -44,7 +44,7 @@ app.get("/authenticate", (req, res) => {
   });
 
   res.redirect(
-    `https://app.asana.com/-/oauth_authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=${generatedState}`
+    `https://app.asana.com/-/oauth_authorize?response_type=code&client_id=1206825759818324&redirect_uri=http://localhost:3000/oauth-callback&state=${generatedState}`
   );
 });
 
@@ -68,9 +68,9 @@ app.get("/oauth-callback", (req, res) => {
   // Body of the POST request to the token exchange endpoint.
   const body = {
     grant_type: "authorization_code",
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_SECRET,
-    redirect_uri: process.env.REDIRECT_URI,
+    client_id: "1206825759818324",
+    client_secret: "a4842e45a2e601da747d4e5658d87757",
+    redirect_uri: "http://localhost:3000/oauth-callback",
     code: req.query.code,
   };
 
